@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { StackRecognisedIllustration } from './components/StackRecognisedIllustration'
+import { FindSignalIllustration } from './components/FindSignalIllustration'
+import { NoFileTooLargeIllustration } from './components/NoFileTooLargeIllustration'
 
 export default function HomePage() {
   return (
@@ -43,12 +45,10 @@ export default function HomePage() {
           fontSize: '1.125rem', color: '#6b7280', maxWidth: '480px',
           lineHeight: 1.7, margin: '0 0 2.5rem'
         }}>
-          When something breaks at 2am, you need answers — not a wall of text.
-          Logdesk is a macOS app for streaming, filtering, and searching log files,
-          built so you can find what matters and get back to work.
+          Filter, search, and stream local log files — however large.
         </p>
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <a href="#download" style={{
+          <a href="https://pub-3d98399b0e8b4d5bb8a736a4afd4ba05.r2.dev/latest/logdesk_aarch64.dmg" download style={{
             display: 'inline-block', background: '#111827', color: '#fff',
             padding: '0.625rem 1.5rem', borderRadius: '0.5rem',
             fontWeight: 600, fontSize: '0.9375rem', textDecoration: 'none'
@@ -80,7 +80,9 @@ export default function HomePage() {
             Filter by log level, keyword, or time range. Get straight to the line that matters — without scrolling through thousands of others.
           </p>
         </div>
-        <div style={{ aspectRatio: '4/3', background: '#f9fafb', border: '1px dashed #d1d5db', borderRadius: '1rem' }} />
+        <div style={{ aspectRatio: '4/3' }}>
+          <FindSignalIllustration />
+        </div>
       </section>
 
       {/* Feature: Auto detects log files */}
@@ -118,7 +120,9 @@ export default function HomePage() {
             Log files grow fast. Logdesk streams and searches through gigabytes without slowing down — even the files you've been putting off opening.
           </p>
         </div>
-        <div style={{ aspectRatio: '4/3', background: '#f9fafb', border: '1px dashed #d1d5db', borderRadius: '1rem' }} />
+        <div style={{ aspectRatio: '4/3' }}>
+          <NoFileTooLargeIllustration />
+        </div>
       </section>
 
       {/* Feature: Delightful to use */}

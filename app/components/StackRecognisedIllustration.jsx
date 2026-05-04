@@ -1,12 +1,12 @@
 const ROWS = [
-  { source: 'nginx',  color: '#10b981', bg: '#d1fae5', text: '#065f46', w: 174 },
-  { source: 'docker', color: '#3b82f6', bg: '#dbeafe', text: '#1d4ed8', w: 140 },
-  { source: 'rails',  color: '#ef4444', bg: '#fee2e2', text: '#991b1b', w: 198, highlight: true },
-  { source: 'nginx',  color: '#10b981', bg: '#d1fae5', text: '#065f46', w: 116 },
-  { source: 'docker', color: '#3b82f6', bg: '#dbeafe', text: '#1d4ed8', w: 162 },
-  { source: 'custom', color: '#8b5cf6', bg: '#ede9fe', text: '#5b21b6', w: 132 },
-  { source: 'rails',  color: '#ef4444', bg: '#fee2e2', text: '#991b1b', w: 150 },
-  { source: 'nginx',  color: '#10b981', bg: '#d1fae5', text: '#065f46', w: 186 },
+  { source: 'nginx',  w: 174 },
+  { source: 'docker', w: 140 },
+  { source: 'rails',  w: 198, highlight: true },
+  { source: 'nginx',  w: 116 },
+  { source: 'docker', w: 162 },
+  { source: 'custom', w: 132 },
+  { source: 'rails',  w: 150 },
+  { source: 'nginx',  w: 186 },
 ]
 
 const ROW_H = 26
@@ -42,7 +42,7 @@ export function StackRecognisedIllustration() {
             fill: #f3f4f6;
           }
           .src-lr.src-hl:hover .src-row-bg {
-            fill: #fee2e2;
+            fill: #f3f4f6;
           }
         `}</style>
       </defs>
@@ -91,28 +91,28 @@ export function StackRecognisedIllustration() {
               {/* Hover + highlight background — transparent rect makes the whole row hoverable */}
               <rect className="src-row-bg" x="12" y={ry} width="376" height={ROW_H} />
 
-              {/* Persistent highlight background for the pre-highlighted row */}
+              {/* Persistent highlight background */}
               {row.highlight && (
-                <rect x="12" y={ry} width="376" height={ROW_H} fill={row.bg} opacity="0.4" />
+                <rect x="12" y={ry} width="376" height={ROW_H} fill="#f3f4f6" />
               )}
 
               {/* Left accent strip for highlighted row */}
               {row.highlight && (
-                <rect x="12" y={ry} width="3" height={ROW_H} fill={row.color} />
+                <rect x="12" y={ry} width="3" height={ROW_H} fill="#111827" />
               )}
 
               {/* Source dot */}
-              <circle cx="32" cy={cy} r="3.5" fill={row.color} />
+              <circle cx="32" cy={cy} r="3.5" fill="#374151" />
 
               {/* Source badge */}
-              <rect x="42" y={cy - 8} width="42" height="16" rx="3" fill={row.bg} />
+              <rect x="42" y={cy - 8} width="42" height="16" rx="3" fill="#f3f4f6" />
               <text
                 x="63"
                 y={cy + 4}
                 textAnchor="middle"
                 fontSize="8.5"
                 fontFamily="'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace"
-                fill={row.text}
+                fill="#6b7280"
                 fontWeight="600"
               >
                 {row.source}
@@ -121,8 +121,7 @@ export function StackRecognisedIllustration() {
               {/* Log content bar */}
               <rect
                 x="92" y={cy - 4} width={row.w} height="8" rx="2"
-                fill={row.highlight ? '#fca5a5' : '#e5e7eb'}
-                opacity={row.highlight ? 0.55 : 1}
+                fill={row.highlight ? '#d1d5db' : '#e5e7eb'}
               />
 
               {/* Trailing fragment bar (every other row, adds depth) */}
