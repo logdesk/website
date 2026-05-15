@@ -114,10 +114,10 @@ export default function HomePage() {
       }}>
         <div>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#111827', margin: '0 0 1rem' }}>
-            No file too large.
+            Lean and performant.
           </h2>
           <p style={{ fontSize: '1rem', color: '#6b7280', lineHeight: 1.8, margin: 0 }}>
-            Log files grow fast. Logdesk streams and searches through gigabytes without slowing down — even the files you've been putting off opening.
+            Built on Tauri and powered by a Rust parser, Logdesk stays lean and fast — stream and search gigabytes of logs without slowing down.
           </p>
         </div>
         <div style={{ aspectRatio: '4/3' }}>
@@ -148,7 +148,11 @@ export default function HomePage() {
         textAlign: 'center', padding: '1.5rem',
         borderTop: '1px solid #e5e7eb', fontSize: '0.8125rem', color: '#9ca3af'
       }}>
-        © {new Date().getFullYear()} Logdesk
+        <span>© {new Date().getFullYear()} Logdesk</span>
+        <span style={{ margin: '0 0.5rem' }}>·</span>
+        <Link href="/privacy" style={{ color: '#9ca3af', textDecoration: 'none' }}>
+          Privacy Policy
+        </Link>
       </footer>
     </main>
   )

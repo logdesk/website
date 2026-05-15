@@ -1,0 +1,173 @@
+# Supported Formats
+
+Logdesk automatically detects the format of a log file when you open it — no configuration required. Detection uses the filename first, then falls back to inspecting the file's content.
+
+The following formats are supported out of the box.
+
+---
+
+## JSON formats
+
+### Generic JSON
+
+Matches any newline-delimited JSON file where each line is a JSON object. Logdesk looks for common field names to extract level, timestamp, and message.
+
+| Role      | Fields checked (in order)                             |
+| --------- | ----------------------------------------------------- |
+| Timestamp | `timestamp`, `time`, `ts`, `@timestamp`               |
+| Level     | `level`, `severity`, `lvl`, `loglevel`                |
+| Message   | `message`, `msg`, `event`, `text`, `body`             |
+
+```json
+{"timestamp":"2024-01-01T00:00:00Z","level":"info","message":"server started"}
+```
+
+### ECS (Elastic Common Schema)
+
+Detected by the presence of an `ecs.version` field.
+
+| Role      | Field          |
+| --------- | -------------- |
+| Timestamp | `@timestamp`   |
+| Level     | `log.level`    |
+| Message   | `message`      |
+
+```json
+{"@timestamp":"2025-01-13T09:58:13.631Z","log.level":"info","message":"hello","ecs.version":"1.6.0"}
+```
+
+### Pino / Bunyan
+
+Detected by the presence of a `v` or `pid` field. Supports Pino's numeric level scale.
+
+| Numeric level | Maps to |
+| ------------- | ------- |
+| 0–15          | TRACE   |
+| 16–25         | DEBUG   |
+| 26–35         | INFO    |
+| 36–45         | WARN    |
+| 46–55         | ERROR   |
+| 56+           | FATAL   |
+
+| Role      | Field  |
+| --------- | ------ |
+| Timestamp | `time` |
+| Level     | `level` (numeric or string) |
+| Message   | `msg`  |
+
+```json
+{"level":30,"time":1531257475957,"pid":657,"v":1,"msg":"hello world"}
+```
+
+### Docker JSON logs
+
+Detected by the presence of both `log` and `stream` fields. Docker containers don't emit a log level, so all lines are shown as Unknown.
+
+| Role      | Field    |
+| --------- | -------- |
+| Timestamp | `time`   |
+| Level     | — (Unknown) |
+| Message   | `log`    |
+
+```json
+{"log":"starting server\n","stream":"stdout","time":"2024-01-01T00:00:00.000000000Z"}
+```
+
+---
+
+## Logfmt
+
+Detected when a line contains two or more `key=value` pairs. Values containing spaces must be quoted.
+
+| Role      | Fields checked (in order)              |
+| --------- | -------------------------------------- |
+| Timestamp | `ts`, `time`, `timestamp`              |
+| Level     | `level`, `lvl`, `severity`             |
+| Message   | `msg`, `message`                       |
+
+```
+ts=2024-01-01T00:00:00Z level=info msg="request completed" latency=42ms status=200
+```
+
+---
+
+## Text formats
+
+### Syslog
+
+Detected by filename (`syslog`, `messages`, `kern.log`, `auth.log`, `daemon.log`, `secure`, `audit.log`) or by content pattern. Supports both RFC 3164 (BSD) and RFC 5424 formats. Syslog doesn't carry a log level — all lines are shown as Unknown.
+
+**RFC 5424:**
+```
+<34>1 2003-10-11T22:14:15.003Z mymachine.example.com su 77042 ID47 - connection accepted
+```
+
+**RFC 3164:**
+```
+Jan  1 12:00:00 myhostname myprocess[1234]: connection accepted from 10.0.0.1
+```
+
+### Nginx error log
+
+Detected by filename (`nginx-error.log`, `error.log` in an nginx path, etc.) or by content.
+
+| Role      | Field       |
+| --------- | ----------- |
+| Timestamp | `timestamp` |
+| Level     | `level`     |
+| Message   | `body`      |
+
+```
+2024/01/10 12:00:00 [error] 1234#0: *1 connect() failed (111: Connection refused)
+```
+
+### Access log (Apache / Nginx)
+
+Detected by filename (`access.log`, `nginx-access.log`, `httpd-access.log`, etc.) or by content. Supports Combined Log Format, Common Log Format, and a variant with the timestamp first.
+
+Log level is derived from the HTTP status code:
+
+| Status range | Level   |
+| ------------ | ------- |
+| 1xx, 2xx     | INFO    |
+| 3xx          | WARN    |
+| 4xx, 5xx     | ERROR   |
+
+Extracted fields include `client_ip`, `method`, `path`, `status`, `bytes`, `referer`, and `user_agent`.
+
+```
+66.249.73.185 - - [17/May/2015:10:05:00 +0000] "GET /reset.css HTTP/1.1" 200 1015 "-" "Mozilla/5.0"
+```
+
+### Apache error log
+
+Detected by filename (`apache-error.log`, `httpd-error.log`, etc.) or by content. Supports Apache 2.2 and 2.4 formats.
+
+```
+[Wed Jan 10 12:00:00.123456 2024] [error] [pid 1234] [client 1.2.3.4:80] File does not exist: /var/www/html/favicon.ico
+```
+
+### Java logging (util.logging, Log4j, Logback)
+
+Detected by content. Stack traces that follow a log line are grouped with it rather than shown as separate entries.
+
+Recognised level names include `TRACE`, `FINER`, `FINEST`, `DEBUG`, `FINE`, `CONFIG`, `INFO`, `WARN`, `WARNING`, `ERROR`, `SEVERE`, and `FATAL`.
+
+```
+2025-01-24T07:00:35,307 INFO [main] com.example.App: server listening on port 8080
+```
+
+### Rust env\_logger
+
+Detected by content. The `logger` field shows the module or crate name.
+
+```
+[2024-01-01T12:00:00Z INFO  my_crate::server] listening on 0.0.0.0:8080
+```
+
+---
+
+## Plain text (fallback)
+
+If no format matches, Logdesk treats the file as plain text. Each line is shown as-is with no level or timestamp extraction.
+

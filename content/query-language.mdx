@@ -1,0 +1,108 @@
+# Query Language
+
+Logdesk has a built-in query language for filtering log lines as you work. It supports plain text search, field-based conditions, regular expressions, and boolean logic — all composable in a single query bar.
+
+## Text search
+
+Type any word or phrase to search across all fields. Matching is case-insensitive.
+
+```
+error
+connection refused
+"out of memory"
+```
+
+Use quotes for multi-word phrases. Without quotes, each word is matched independently.
+
+## Field queries
+
+Target a specific field using `field OP value` syntax.
+
+```
+level=error
+message:timeout
+status>=400
+level!=debug
+```
+
+| Operator | Meaning               | Example              |
+| -------- | --------------------- | -------------------- |
+| `=`      | Exact match           | `level=error`        |
+| `!=`     | Exclude matches       | `level!=debug`       |
+| `:`      | Contains (substring)  | `message:timeout`    |
+| `>`      | Greater than          | `duration>1000`      |
+| `<`      | Less than             | `status<500`         |
+| `>=`     | Greater than or equal | `attempts>=3`        |
+| `<=`     | Less than or equal    | `latency<=100`       |
+
+**Field names** can contain letters, numbers, underscores, dots, and hyphens — for example `level`, `request.path`, `http-method`.
+
+**Values** don't need quotes unless they contain spaces:
+
+```
+message="connection timeout"
+path="/api/v2/users"
+```
+
+### The `level` field
+
+`level` is a first-class field. Standard values are `trace`, `debug`, `info`, `warn`, `error`, `fatal`, and `unknown`. All operators work with it:
+
+```
+level=error
+level>=warn
+level!=debug
+```
+
+## Regular expressions
+
+Wrap a pattern in forward slashes. Add `i` after the closing slash for case-insensitive matching.
+
+```
+/timeout/
+/Error/i
+/Connection.*refused/i
+/^ERROR:/
+/timeout|deadline/
+```
+
+Regex is matched against the full log line. The pattern must be a valid [Rust regex](https://docs.rs/regex).
+
+## Boolean logic
+
+Combine conditions with `AND`, `OR`, and `NOT` (case-insensitive). Use parentheses to group expressions.
+
+```
+level=error AND message:timeout
+level=error OR level=fatal
+NOT source=test
+(level=error OR level=fatal) AND NOT source=test
+level=warn AND (duration>1000 OR attempts>=5)
+```
+
+**Precedence** (highest to lowest): `NOT` → `AND` → `OR`
+
+## Examples
+
+| Query | What it finds |
+| ----- | ------------- |
+| `error` | Any line containing "error" |
+| `level=error` | Lines where level is exactly `error` |
+| `level=error AND message:timeout` | Error-level lines containing "timeout" |
+| `(level=error OR level=fatal) AND NOT source=test` | Production errors and fatals, excluding test logs |
+| `/Connection.*refused/i` | Lines matching the regex, case-insensitive |
+| `level=warn AND duration>1000` | Warnings taking more than 1000ms |
+| `status>=400` | HTTP 4xx and 5xx responses |
+| `NOT level=debug` | Everything except debug logs |
+
+## How field queries work on plain-text logs
+
+For log formats that aren't key-value structured (Nginx access logs, syslog, Java logs), Logdesk extracts named fields from each line at parse time — things like `method`, `status`, `path`, `duration`. Those extracted fields are fully queryable just like fields in JSON or logfmt logs.
+
+Regex and text search always operate on the original raw line.
+
+## Case sensitivity
+
+- **Text search** — case-insensitive
+- **Field matching** — case-insensitive
+- **Regex** — case-sensitive by default; add `/i` to opt in to case-insensitive matching

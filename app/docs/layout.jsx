@@ -9,7 +9,7 @@ export default async function DocsLayout({ children }) {
   return (
     <Layout
       navbar={navbar}
-      pageMap={await getPageMap()}
+      pageMap={await getPageMap('/docs')}
       docsRepositoryBase="https://github.com/raathi/logdesk"
       footer={footer}
     >

@@ -1,3 +1,25 @@
-# Welcome to Logdesk
+# Introduction
 
-Logdesk is a local logs analyser app built with Tauri and React.
+Logdesk is a macOS app for reading, searching, and filtering local log files. It is built for developers who spend time digging through logs and want a tool that stays out of the way.
+
+## What it does
+
+Open any log file and Logdesk starts reading it immediately — no setup, no config files, no plugins to install. It detects the format automatically and extracts structured fields so you can filter by level, search by keyword, or write precise queries without touching the raw text.
+
+Large files are not a problem. Logdesk is built on a Rust parser and streams content rather than loading it all into memory, so it stays fast regardless of file size.
+
+## Key features
+
+**Automatic format detection** — Logdesk recognises common formats out of the box, including JSON, logfmt, Nginx, Apache, syslog, Docker, Pino, ECS, Java, and Rust env_logger. See [Supported Formats](/docs/supported-formats) for the full list.
+
+**Query language** — Filter logs using a simple but expressive syntax: text search, field conditions (`level=error`, `status>=400`), regular expressions, and boolean logic. See [Query Language](/docs/query-language) for the full reference.
+
+**Streaming** — Tail a file as it grows and watch new entries appear in real time.
+
+**Performance** — Powered by a Rust backend via Tauri. Handles gigabyte-scale log files without slowing down.
+
+## Getting started
+
+[Download Logdesk](https://pub-3d98399b0e8b4d5bb8a736a4afd4ba05.r2.dev/latest/logdesk_aarch64.dmg) and open it. Then drag a log file onto the window, or use **File → Open** to browse for one. Logdesk will detect the format and display the entries straight away.
+
+To start filtering, click the search bar at the top and type a query. A plain word like `error` matches any line containing that text. For more targeted queries, see the [Query Language](/docs/query-language) page.
