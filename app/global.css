@@ -1,0 +1,21 @@
+.btn-primary {
+  transition: opacity 0.15s ease;
+}
+.btn-primary:hover {
+  opacity: 0.85;
+}
+
+.btn-secondary {
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.btn-secondary:hover {
+  background: #f9fafb !important;
+  border-color: #9ca3af !important;
+}
+
+.nav-link {
+  transition: color 0.15s ease;
+}
+.nav-link:hover {
+  color: #111827 !important;
+}

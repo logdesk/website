@@ -1,0 +1,77 @@
+/* ── Typography hierarchy ──────────────────────────────────────────── */
+
+article h1,
+.nextra-content h1,
+h1.nx-mt-2 {
+  font-size: 1.75rem;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: #111;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+article h2,
+.nextra-content h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #1a1a1a;
+  margin-top: 2.75rem;
+  margin-bottom: 0.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+article h3,
+article h4,
+.nextra-content h3,
+.nextra-content h4 {
+  font-weight: 550;
+  color: #222;
+  margin-top: 1.75rem;
+}
+
+/* Body text */
+article p,
+.nextra-content p {
+  color: #3a3a3a;
+  line-height: 1.75;
+  font-size: 0.9375rem;
+}
+
+/* Bold inline — feature list items */
+article strong,
+.nextra-content strong {
+  font-weight: 600;
+  color: #111;
+}
+
+/* ── Navbar ────────────────────────────────────────────────────────── */
+
+nav a[href="/"],
+nav span,
+.nextra-nav-container a {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* ── Sidebar ───────────────────────────────────────────────────────── */
+
+.nextra-sidebar-container .nx-font-bold,
+[class*="sidebar"] strong,
+[class*="sidebar"] b {
+  font-weight: 550;
+}
+
+/* ── TOC ───────────────────────────────────────────────────────────── */
+
+.nextra-toc .nx-font-semibold,
+.nextra-toc p {
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #888;
+}

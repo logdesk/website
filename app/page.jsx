@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { StackRecognisedIllustration } from './components/StackRecognisedIllustration'
 import { FindSignalIllustration } from './components/FindSignalIllustration'
 import { NoFileTooLargeIllustration } from './components/NoFileTooLargeIllustration'
@@ -11,14 +12,18 @@ export default function HomePage() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '1rem 2rem', borderBottom: '1px solid #e5e7eb'
       }}>
-        <span style={{ fontWeight: 700, fontSize: '1.125rem', letterSpacing: '-0.02em' }}>logdesk</span>
-        <Link href="/docs" style={{
-          fontSize: '0.875rem', color: '#374151', textDecoration: 'none',
-          padding: '0.375rem 0.875rem', border: '1px solid #d1d5db',
-          borderRadius: '0.375rem'
-        }}>
-          Docs
-        </Link>
+        <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <Image src="/logo.png" alt="Logdesk" width={32} height={32} />
+          <span style={{ fontWeight: 700, fontSize: '1.125rem', letterSpacing: '-0.02em' }}>Logdesk</span>
+        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <Link href="/pricing" className="nav-link" style={{ fontSize: '0.875rem', color: '#6b7280', textDecoration: 'none' }}>
+            Pricing
+          </Link>
+          <Link href="/docs" className="nav-link" style={{ fontSize: '0.875rem', color: '#6b7280', textDecoration: 'none' }}>
+            Docs
+          </Link>
+        </div>
       </nav>
 
       {/* Hero */}
@@ -26,15 +31,7 @@ export default function HomePage() {
         display: 'flex', flexDirection: 'column', alignItems: 'center',
         textAlign: 'center', padding: '6rem 2rem 4rem'
       }}>
-        <div style={{
-          display: 'inline-block', fontSize: '0.75rem', fontWeight: 600,
-          letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b7280',
-          background: '#f3f4f6', padding: '0.25rem 0.75rem',
-          borderRadius: '9999px', marginBottom: '1.5rem'
-        }}>
-          For macOS
-        </div>
-        <h1 style={{
+<h1 style={{
           fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: 800,
           letterSpacing: '-0.04em', lineHeight: 1.1,
           color: '#111827', margin: '0 0 1.25rem'
@@ -45,17 +42,17 @@ export default function HomePage() {
           fontSize: '1.125rem', color: '#6b7280', maxWidth: '480px',
           lineHeight: 1.7, margin: '0 0 2.5rem'
         }}>
-          Filter, search, and stream local log files — however large.
+          Filter, search, and stream local log files — fast.
         </p>
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <a href="https://pub-3d98399b0e8b4d5bb8a736a4afd4ba05.r2.dev/latest/logdesk_aarch64.dmg" download style={{
+          <a href="https://pub-3d98399b0e8b4d5bb8a736a4afd4ba05.r2.dev/latest/logdesk_aarch64.dmg" download className="btn-primary" style={{
             display: 'inline-block', background: '#111827', color: '#fff',
             padding: '0.625rem 1.5rem', borderRadius: '0.5rem',
             fontWeight: 600, fontSize: '0.9375rem', textDecoration: 'none'
           }}>
-            Download Logdesk
+            Download
           </a>
-          <Link href="/docs" style={{
+          <Link href="/docs" className="btn-secondary" style={{
             display: 'inline-block', background: '#fff', color: '#374151',
             padding: '0.625rem 1.5rem', borderRadius: '0.5rem',
             fontWeight: 600, fontSize: '0.9375rem', textDecoration: 'none',
