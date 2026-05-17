@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { StackRecognisedIllustration } from './components/StackRecognisedIllustration'
 import { FindSignalIllustration } from './components/FindSignalIllustration'
 import { NoFileTooLargeIllustration } from './components/NoFileTooLargeIllustration'
+import { StaysLocalIllustration } from './components/StaysLocalIllustration'
 
 export default function HomePage() {
   return (
@@ -95,7 +96,7 @@ export default function HomePage() {
         </div>
         <div style={{ order: 2 }}>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#111827', margin: '0 0 1rem' }}>
-            Your stack, recognised.
+            Your log sources, understood.
           </h2>
           <p style={{ fontSize: '1rem', color: '#6b7280', lineHeight: 1.8, margin: 0 }}>
             Open a log from Nginx, Docker, Rails, or your own service. Logdesk recognises the format and starts reading straight away — no config, no setup.
@@ -129,14 +130,16 @@ export default function HomePage() {
         alignItems: 'center', borderTop: '1px solid #e5e7eb',
       }}>
         <div style={{ order: 1 }}>
-          <div style={{ aspectRatio: '4/3', background: '#f9fafb', border: '1px dashed #d1d5db', borderRadius: '1rem' }} />
+          <div style={{ aspectRatio: '4/3' }}>
+            <StaysLocalIllustration />
+          </div>
         </div>
         <div style={{ order: 2 }}>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#111827', margin: '0 0 1rem' }}>
-            Feels like it should.
+            Stays on your machine.
           </h2>
           <p style={{ fontSize: '1rem', color: '#6b7280', lineHeight: 1.8, margin: 0 }}>
-            Every scroll, filter, and keystroke feels considered. You spend a lot of time in your tools — Logdesk is one worth enjoying.
+            Logdesk is entirely local. Your logs never leave your computer — no uploads, no telemetry, no data collection. What you read stays with you.
           </p>
         </div>
       </section>
