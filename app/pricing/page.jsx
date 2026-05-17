@@ -128,9 +128,27 @@ export default function PricingPage() {
             fontWeight: 600, fontSize: '0.9375rem',
             color: '#6b7280', background: '#1f2937'
           }}>
-            Coming soon
+            We're working on it
           </div>
         </div>
+      </section>
+
+      {/* Philosophy */}
+      <section style={{
+        maxWidth: '680px', margin: '0 auto', padding: '0 2rem 6rem'
+      }}>
+        <h2 style={{
+          fontSize: '1rem', fontWeight: 700, letterSpacing: '-0.01em',
+          color: '#111827', margin: '0 0 1.25rem'
+        }}>
+          Our pricing philosophy
+        </h2>
+        <p style={{ fontSize: '0.9375rem', color: '#6b7280', lineHeight: 1.8, margin: '0 0 1rem' }}>
+          Free should never mean crippled. Everything you need to read, search, and understand your logs is free — the core experience is never gated.
+        </p>
+        <p style={{ fontSize: '0.9375rem', color: '#6b7280', lineHeight: 1.8, margin: 0 }}>
+          Pro adds conveniences and features for heavier use — things that make Logdesk fit more naturally into a daily workflow. If you never need them, Free is genuinely enough.
+        </p>
       </section>
 
       <footer style={{
