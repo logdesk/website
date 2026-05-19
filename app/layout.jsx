@@ -4,7 +4,10 @@ import './global.css'
 
 export const metadata = {
   title: 'Logdesk',
-  description: 'A local logs analyser for developers'
+  description: 'A local logs analyser for developers',
+  icons: {
+    icon: '/logo.png',
+  },
 }
 
 export default function RootLayout({ children }) {
