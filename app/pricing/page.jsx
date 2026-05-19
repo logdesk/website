@@ -41,7 +41,7 @@ export default function PricingPage() {
           letterSpacing: '-0.04em', lineHeight: 1.1,
           color: '#111827', margin: '0 0 1rem'
         }}>
-          Simple pricing.
+          Buy once. Keep forever.
         </h1>
         <p style={{ fontSize: '1.125rem', color: '#6b7280', margin: 0 }}>
           Free to get started. Upgrade when you need more.
@@ -73,8 +73,8 @@ export default function PricingPage() {
             {[
               'Open and stream local log files',
               'Filter by level, keyword, and time',
-              'Stack format auto-detection',
-              'Unlimited file size',
+              'Automatic format detection for 15+ formats',
+              'Multiple log sources',
             ].map(f => (
               <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem', fontSize: '0.9375rem', color: '#374151' }}>
                 <Check />
@@ -113,6 +113,7 @@ export default function PricingPage() {
             {[
               'Everything in Free',
               'Session persistence',
+              'Stream logs from Docker containers',
             ].map(f => (
               <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem', fontSize: '0.9375rem', color: '#e5e7eb' }}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, marginTop: '0.1rem' }}>
@@ -133,25 +134,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Philosophy */}
-      <section style={{
-        maxWidth: '680px', margin: '0 auto', padding: '0 2rem 6rem'
-      }}>
-        <h2 style={{
-          fontSize: '1rem', fontWeight: 700, letterSpacing: '-0.01em',
-          color: '#111827', margin: '0 0 1.25rem'
-        }}>
-          Our pricing philosophy
-        </h2>
-        <p style={{ fontSize: '0.9375rem', color: '#6b7280', lineHeight: 1.8, margin: '0 0 1rem' }}>
-          Free should never mean crippled. Everything you need to read, search, and understand your logs is free — the core experience is never gated.
-        </p>
-        <p style={{ fontSize: '0.9375rem', color: '#6b7280', lineHeight: 1.8, margin: 0 }}>
-          Pro adds conveniences and features for heavier use — things that make Logdesk fit more naturally into a daily workflow. If you never need them, Free is genuinely enough.
-        </p>
-      </section>
-
-      <footer style={{
+<footer style={{
         textAlign: 'center', padding: '1.5rem',
         borderTop: '1px solid #e5e7eb', fontSize: '0.8125rem', color: '#9ca3af'
       }}>
