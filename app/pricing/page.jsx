@@ -13,7 +13,7 @@ export default function PricingPage() {
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0 }}>
       {/* Nav */}
-      <nav style={{
+      <nav className="nav-mobile" style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '1rem 2rem', borderBottom: '1px solid #e5e7eb'
       }}>
@@ -32,7 +32,7 @@ export default function PricingPage() {
       </nav>
 
       {/* Header */}
-      <section style={{
+      <section className="pricing-header-mobile" style={{
         display: 'flex', flexDirection: 'column', alignItems: 'center',
         textAlign: 'center', padding: '5rem 2rem 3rem'
       }}>
@@ -49,10 +49,7 @@ export default function PricingPage() {
       </section>
 
       {/* Cards */}
-      <section style={{
-        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem',
-        maxWidth: '680px', margin: '0 auto', padding: '0 2rem 6rem'
-      }}>
+      <section className="pricing-cards">
         {/* Free */}
         <div style={{
           border: '1px solid #e5e7eb', borderRadius: '1rem',

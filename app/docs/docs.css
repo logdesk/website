@@ -48,6 +48,17 @@ article strong,
   color: #111;
 }
 
+/* ── Dark mode toggle ──────────────────────────────────────────────── */
+
+button[title="Change theme"],
+button[aria-label="Toggle dark mode"] {
+  display: none !important;
+}
+
+.nextra-breadcrumb {
+  display: none !important;
+}
+
 /* ── Navbar ────────────────────────────────────────────────────────── */
 
 nav a[href="/"],

@@ -9,7 +9,7 @@ export default function HomePage() {
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0 }}>
       {/* Nav */}
-      <nav style={{
+      <nav className="nav-mobile" style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '1rem 2rem', borderBottom: '1px solid #e5e7eb'
       }}>
@@ -28,7 +28,7 @@ export default function HomePage() {
       </nav>
 
       {/* Hero */}
-      <section style={{
+      <section className="hero-mobile" style={{
         display: 'flex', flexDirection: 'column', alignItems: 'center',
         textAlign: 'center', padding: '6rem 2rem 4rem'
       }}>
@@ -65,12 +65,8 @@ export default function HomePage() {
       </section>
 
       {/* Feature: Narrow down with filters */}
-      <section style={{
-        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem',
-        maxWidth: '960px', margin: '0 auto', padding: '5rem 2rem',
-        alignItems: 'center', borderTop: '1px solid #e5e7eb',
-      }}>
-        <div>
+      <section className="feature-section">
+        <div className="feature-text">
           <h2 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#111827', margin: '0 0 1rem' }}>
             Find the signal.
           </h2>
@@ -78,23 +74,19 @@ export default function HomePage() {
             Filter by log level, keyword, or time range. Get straight to the line that matters — without scrolling through thousands of others.
           </p>
         </div>
-        <div style={{ aspectRatio: '4/3' }}>
+        <div className="feature-illustration" style={{ aspectRatio: '4/3' }}>
           <FindSignalIllustration />
         </div>
       </section>
 
       {/* Feature: Auto detects log files */}
-      <section style={{
-        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem',
-        maxWidth: '960px', margin: '0 auto', padding: '5rem 2rem',
-        alignItems: 'center', borderTop: '1px solid #e5e7eb',
-      }}>
-        <div style={{ order: 1 }}>
+      <section className="feature-section reverse">
+        <div className="feature-illustration">
           <div style={{ aspectRatio: '4/3', borderRadius: '1rem', overflow: 'hidden' }}>
             <StackRecognisedIllustration />
           </div>
         </div>
-        <div style={{ order: 2 }}>
+        <div className="feature-text">
           <h2 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#111827', margin: '0 0 1rem' }}>
             Your log sources, understood.
           </h2>
@@ -105,12 +97,8 @@ export default function HomePage() {
       </section>
 
       {/* Feature: Optimised for performance */}
-      <section style={{
-        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem',
-        maxWidth: '960px', margin: '0 auto', padding: '5rem 2rem',
-        alignItems: 'center', borderTop: '1px solid #e5e7eb',
-      }}>
-        <div>
+      <section className="feature-section">
+        <div className="feature-text">
           <h2 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#111827', margin: '0 0 1rem' }}>
             Lean and performant.
           </h2>
@@ -118,23 +106,19 @@ export default function HomePage() {
             Built on Tauri and powered by a Rust parser, Logdesk stays lean and fast — stream and search gigabytes of logs without slowing down.
           </p>
         </div>
-        <div style={{ aspectRatio: '4/3' }}>
+        <div className="feature-illustration" style={{ aspectRatio: '4/3' }}>
           <NoFileTooLargeIllustration />
         </div>
       </section>
 
       {/* Feature: Delightful to use */}
-      <section style={{
-        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem',
-        maxWidth: '960px', margin: '0 auto', padding: '5rem 2rem',
-        alignItems: 'center', borderTop: '1px solid #e5e7eb',
-      }}>
-        <div style={{ order: 1 }}>
+      <section className="feature-section reverse">
+        <div className="feature-illustration">
           <div style={{ aspectRatio: '4/3' }}>
             <StaysLocalIllustration />
           </div>
         </div>
-        <div style={{ order: 2 }}>
+        <div className="feature-text">
           <h2 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#111827', margin: '0 0 1rem' }}>
             Stays on your machine.
           </h2>

@@ -19,3 +19,68 @@
 .nav-link:hover {
   color: #111827 !important;
 }
+
+.feature-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+  align-items: center;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Mobile default: text always on top, illustration below */
+.feature-section .feature-text {
+  order: 0;
+}
+
+.feature-section .feature-illustration {
+  order: 1;
+}
+
+@media (min-width: 641px) {
+  .feature-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 5rem 2rem;
+  }
+
+  /* Desktop: reverse layout — illustration left, text right */
+  .feature-section.reverse .feature-illustration {
+    order: 1;
+  }
+
+  .feature-section.reverse .feature-text {
+    order: 2;
+  }
+}
+
+.pricing-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 2rem 6rem;
+}
+
+@media (max-width: 640px) {
+  .nav-mobile {
+    padding: 0.875rem 1.25rem !important;
+  }
+
+  .hero-mobile {
+    padding: 4rem 1.25rem 3rem !important;
+  }
+
+  .pricing-cards {
+    grid-template-columns: 1fr;
+    padding: 0 1.25rem 4rem;
+  }
+
+  .pricing-header-mobile {
+    padding: 3rem 1.25rem 2rem !important;
+  }
+}
