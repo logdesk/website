@@ -1,6 +1,6 @@
 # Query Language
 
-Logdesk has a built-in query language for filtering log lines as you work. It supports plain text search, field-based conditions, regular expressions, and boolean logic — all composable in a single query bar.
+Logdesk has a built-in query language for filtering log lines as you work. It supports plain text search, field-based conditions, regular expressions, and boolean logic.
 
 ## Text search
 
@@ -25,15 +25,15 @@ status>=400
 level!=debug
 ```
 
-| Operator | Meaning               | Example              |
-| -------- | --------------------- | -------------------- |
-| `=`      | Exact match           | `level=error`        |
-| `!=`     | Exclude matches       | `level!=debug`       |
-| `:`      | Contains (substring)  | `message:timeout`    |
-| `>`      | Greater than          | `duration>1000`      |
-| `<`      | Less than             | `status<500`         |
-| `>=`     | Greater than or equal | `attempts>=3`        |
-| `<=`     | Less than or equal    | `latency<=100`       |
+| Operator | Meaning               | Example           |
+| -------- | --------------------- | ----------------- |
+| `=`      | Exact match           | `level=error`     |
+| `!=`     | Exclude matches       | `level!=debug`    |
+| `:`      | Contains (substring)  | `message:timeout` |
+| `>`      | Greater than          | `duration>1000`   |
+| `<`      | Less than             | `status<500`      |
+| `>=`     | Greater than or equal | `attempts>=3`     |
+| `<=`     | Less than or equal    | `latency<=100`    |
 
 **Field names** can contain letters, numbers, underscores, dots, and hyphens — for example `level`, `request.path`, `http-method`.
 
@@ -46,11 +46,10 @@ path="/api/v2/users"
 
 ### The `level` field
 
-`level` is a first-class field. Standard values are `trace`, `debug`, `info`, `warn`, `error`, `fatal`, and `unknown`. All operators work with it:
+`level` is a first-class field. Standard values are `trace`, `debug`, `info`, `warn`, `error`, `fatal`, and `unknown`.
 
 ```
 level=error
-level>=warn
 level!=debug
 ```
 
@@ -84,16 +83,16 @@ level=warn AND (duration>1000 OR attempts>=5)
 
 ## Examples
 
-| Query | What it finds |
-| ----- | ------------- |
-| `error` | Any line containing "error" |
-| `level=error` | Lines where level is exactly `error` |
-| `level=error AND message:timeout` | Error-level lines containing "timeout" |
+| Query                                              | What it finds                                     |
+| -------------------------------------------------- | ------------------------------------------------- |
+| `error`                                            | Any line containing "error"                       |
+| `level=error`                                      | Lines where level is exactly `error`              |
+| `level=error AND message:timeout`                  | Error-level lines containing "timeout"            |
 | `(level=error OR level=fatal) AND NOT source=test` | Production errors and fatals, excluding test logs |
-| `/Connection.*refused/i` | Lines matching the regex, case-insensitive |
-| `level=warn AND duration>1000` | Warnings taking more than 1000ms |
-| `status>=400` | HTTP 4xx and 5xx responses |
-| `NOT level=debug` | Everything except debug logs |
+| `/Connection.*refused/i`                           | Lines matching the regex, case-insensitive        |
+| `level=warn AND duration>1000`                     | Warnings taking more than 1000ms                  |
+| `status>=400`                                      | HTTP 4xx and 5xx responses                        |
+| `NOT level=debug`                                  | Everything except debug logs                      |
 
 ## How field queries work on plain-text logs
 
