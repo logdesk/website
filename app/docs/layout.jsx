@@ -22,6 +22,7 @@ export default async function DocsLayout({ children }) {
       docsRepositoryBase="https://github.com/raathi/logdesk"
       footer={footer}
       nextThemes={{ defaultTheme: 'light', forcedTheme: 'light' }}
+      darkMode={false}
     >
       {children}
     </Layout>

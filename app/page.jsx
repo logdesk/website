@@ -32,7 +32,7 @@ export default function HomePage() {
         display: 'flex', flexDirection: 'column', alignItems: 'center',
         textAlign: 'center', padding: '6rem 2rem 4rem'
       }}>
-<h1 style={{
+        <h1 style={{
           fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: 800,
           letterSpacing: '-0.04em', lineHeight: 1.1,
           color: '#111827', margin: '0 0 1.25rem'
@@ -45,6 +45,19 @@ export default function HomePage() {
         }}>
           Filter, search, and stream local log files — fast.
         </p>
+        <div style={{ marginBottom: '2.5rem', width: '100%', maxWidth: '960px' }}>
+          <Image
+            src="/app.png"
+            alt="Logdesk app screenshot"
+            width={2922}
+            height={2010}
+            priority
+            style={{
+              width: '100%', height: 'auto', borderRadius: '0.75rem',
+              border: '1px solid #e5e7eb', boxShadow: '0 20px 40px -20px rgba(0,0,0,0.15)'
+            }}
+          />
+        </div>
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           <a href="https://pub-3d98399b0e8b4d5bb8a736a4afd4ba05.r2.dev/latest/logdesk_aarch64.dmg" download className="btn-primary" style={{
             display: 'inline-block', background: '#111827', color: '#fff',
