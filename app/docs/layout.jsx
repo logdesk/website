@@ -21,6 +21,7 @@ export default async function DocsLayout({ children }) {
       pageMap={await getPageMap('/docs')}
       docsRepositoryBase="https://github.com/raathi/logdesk"
       footer={footer}
+      nextThemes={{ defaultTheme: 'light', forcedTheme: 'light' }}
     >
       {children}
     </Layout>
