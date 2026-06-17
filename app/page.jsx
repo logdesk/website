@@ -88,7 +88,7 @@ export default function HomePage() {
         </div>
         <div className="feature-text">
           <h2 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#111827', margin: '0 0 1rem' }}>
-            Your log sources, understood.
+            Automatic format detection.
           </h2>
           <p style={{ fontSize: '1rem', color: '#6b7280', lineHeight: 1.8, margin: 0 }}>
             Open a log from Nginx, Docker, Rails, or your own service. Logdesk recognises the format and starts reading straight away — no config, no setup.
