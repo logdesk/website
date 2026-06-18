@@ -66,7 +66,7 @@ export default function HomePage() {
             padding: '0.625rem 1.5rem', borderRadius: '0.5rem',
             fontWeight: 600, fontSize: '0.9375rem', textDecoration: 'none'
           }}>
-            Download
+            Download for Mac
           </a>
           <Link href="/docs" className="btn-secondary" style={{
             display: 'inline-block', background: '#fff', color: '#1f2937',
