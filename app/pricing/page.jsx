@@ -13,21 +13,23 @@ export default function PricingPage() {
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0 }}>
       {/* Nav */}
-      <nav className="nav-mobile" style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '1rem 2rem', borderBottom: '1px solid #e5e7eb'
-      }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
-          <Image src="/logo.png" alt="Logdesk" width={32} height={32} />
-          <span style={{ fontWeight: 700, fontSize: '1.125rem', letterSpacing: '-0.02em', color: '#111827' }}>Logdesk</span>
-        </Link>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <Link href="/pricing" className="nav-link" style={{ fontSize: '0.875rem', color: '#6b7280', textDecoration: 'none' }}>
-            Pricing
+      <nav className="nav-mobile" style={{ borderBottom: '1px solid #e5e7eb' }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          maxWidth: '960px', margin: '0 auto', padding: '1rem 2rem'
+        }}>
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
+            <Image src="/logo.png" alt="Logdesk" width={32} height={32} />
+            <span style={{ fontWeight: 700, fontSize: '1.125rem', letterSpacing: '-0.02em', color: '#111827' }}>Logdesk</span>
           </Link>
-          <Link href="/docs" className="nav-link" style={{ fontSize: '0.875rem', color: '#6b7280', textDecoration: 'none' }}>
-            Docs
-          </Link>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+            <Link href="/pricing" className="nav-link" style={{ fontSize: '0.875rem', color: '#6b7280', textDecoration: 'none' }}>
+              Pricing
+            </Link>
+            <Link href="/docs" className="nav-link" style={{ fontSize: '0.875rem', color: '#6b7280', textDecoration: 'none' }}>
+              Docs
+            </Link>
+          </div>
         </div>
       </nav>
 
