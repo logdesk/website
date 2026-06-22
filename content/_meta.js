@@ -5,6 +5,9 @@ export default {
       breadcrumb: true,
     },
   },
+  cli: {
+    title: 'CLI',
+  },
   'query-language': {
     title: 'Query Language',
   },

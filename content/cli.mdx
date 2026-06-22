@@ -1,0 +1,154 @@
+# CLI
+
+Logdesk ships with a command-line interface that lets you query logs from a running Logdesk instance. All output is line-delimited JSON (NDJSON), which makes it straightforward to pipe into `jq`, shell scripts, or AI agents like Claude Code.
+
+## Requirements
+
+The Logdesk app must be running. The CLI communicates with it over a Unix socket at `~/.logdesk/cli.sock`. If the app is not open, commands will fail immediately.
+
+The CLI binary is the same executable as the app — run it with a subcommand to enter CLI mode instead of opening the GUI.
+
+## Commands
+
+| Command | Description |
+| ------- | ----------- |
+| `logdesk sources` | List all open log sources |
+| `logdesk tail` | Stream the last N lines from a source |
+| `logdesk query` | Search logs and stream matching entries |
+| `logdesk histogram` | Show time distribution of log levels |
+
+---
+
+### logdesk sources
+
+List all log sources currently open in the app.
+
+```
+logdesk sources
+```
+
+Output is a single JSON object with a `sources` array:
+
+```json
+{"sources":[{"id":"550e8400-e29b-41d4-a716-446655440000","name":"api.log","source_type":"file","status":"active","entry_count":42381}]}
+```
+
+| Field | Description |
+| ----- | ----------- |
+| `id` | UUID identifying the source — used by `tail` and `query` |
+| `name` | Human-readable label (usually the filename) |
+| `source_type` | One of `file`, `stdin`, `pipe`, `command`, `docker` |
+| `status` | `active` while the source is being read, `stopped` otherwise |
+| `entry_count` | Number of entries indexed so far |
+
+---
+
+### logdesk tail
+
+Stream the last N log lines from a source as NDJSON.
+
+```
+logdesk tail --source <ID> [--last <N>]
+```
+
+| Flag | Required | Default | Description |
+| ---- | -------- | ------- | ----------- |
+| `--source` | Yes | — | Source UUID from `logdesk sources` |
+| `--last` | No | `100` | Number of lines to return |
+
+Each line in the output is a log entry, followed by a `done` message:
+
+```json
+{"type":"entry","seq":1,"timestamp_ms":1718000000000,"level":"error","message":"connection refused","source_id":"550e8400-..."}
+{"type":"done","total_matches":100,"lines_scanned":100}
+```
+
+---
+
+### logdesk query
+
+Search logs using text or a field query and stream matching entries. Uses the same [Query Language](/docs/query-language) as the app.
+
+```
+logdesk query <QUERY> [--context <N>] [--limit <N>] [--offset <N>]
+```
+
+| Argument | Required | Default | Description |
+| -------- | -------- | ------- | ----------- |
+| `query` | Yes | — | Plain text or field query (e.g. `level=error`, `"connection refused"`) |
+| `--context` | No | `0` | Lines of context to include before and after each match |
+| `--limit` | No | unlimited | Maximum number of results |
+| `--offset` | No | `0` | Skip the first N results (for pagination) |
+
+Output contains `entry` lines for each match. When `--context` is set, each match is followed by a `context` object:
+
+```json
+{"type":"entry","seq":41,"timestamp_ms":1718000001234,"level":"error","message":"auth token expired","source_id":"550e8400-..."}
+{"type":"context","match_seq":41,"before":[...],"after":[...]}
+{"type":"done","total_matches":3,"lines_scanned":42381}
+```
+
+The `done` line is always the last line and includes total match count and lines scanned.
+
+---
+
+### logdesk histogram
+
+Show the time distribution of log levels across all open sources.
+
+```
+logdesk histogram [--buckets <N>]
+```
+
+| Flag | Required | Default | Description |
+| ---- | -------- | ------- | ----------- |
+| `--buckets` | No | `50` | Number of time buckets to divide the range into |
+
+Output is a single `histogram` object followed by `done`:
+
+```json
+{"type":"histogram","buckets":[{"start_ms":1718000000000,"end_ms":1718000060000,"level":"error","count":4},{"start_ms":1718000000000,"end_ms":1718000060000,"level":"info","count":112},...]}
+{"type":"done","total_matches":0,"lines_scanned":0}
+```
+
+Each bucket covers one time segment and one log level. Multiple buckets can share the same time range — one per level.
+
+---
+
+## Output format
+
+All responses are line-delimited JSON (NDJSON). Each line is a self-contained JSON object with a `type` field:
+
+| Type | Key fields | When it appears |
+| ---- | ---------- | --------------- |
+| `sources` | `sources[]` | Response to `sources` command |
+| `entry` | `seq`, `timestamp_ms`, `level`, `message`, `source_id` | Each matching log line |
+| `context` | `match_seq`, `before[]`, `after[]` | After each entry when `--context > 0` |
+| `histogram` | `buckets[]` | Response to `histogram` command |
+| `done` | `total_matches`, `lines_scanned` | Last line of every response |
+| `error` | `message` | When something goes wrong |
+
+---
+
+## Examples
+
+**List sources and tail the first one:**
+
+```bash
+SOURCE=$(logdesk sources | jq -r '.sources[0].id')
+logdesk tail --source "$SOURCE" --last 50
+```
+
+**Find errors with surrounding context, extract messages:**
+
+```bash
+logdesk query "level=error" --context 2 --limit 20 | jq -r 'select(.type == "entry") | .message'
+```
+
+**Paginate through results in batches of 25:**
+
+```bash
+logdesk query "timeout" --limit 25 --offset 0
+logdesk query "timeout" --limit 25 --offset 25
+logdesk query "timeout" --limit 25 --offset 50
+```
