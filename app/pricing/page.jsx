@@ -112,7 +112,7 @@ export default function PricingPage() {
             {[
               'Everything in Free',
               'Session persistence',
-              'Stream logs from Docker containers',
+              'CLI support for AI agents',
             ].map(f => (
               <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem', fontSize: '0.9375rem', color: '#e5e7eb' }}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, marginTop: '0.1rem' }}>
@@ -128,7 +128,7 @@ export default function PricingPage() {
             fontWeight: 600, fontSize: '0.9375rem',
             color: '#6b7280', background: '#1f2937'
           }}>
-            We're working on it
+            Free while in beta
           </div>
         </div>
       </section>
