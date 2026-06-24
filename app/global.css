@@ -85,9 +85,8 @@
   .features-grid {
     grid-template-columns: 1fr;
   }
-  .feature-card:nth-child(1),
-  .feature-card:nth-child(3) {
-    grid-column: span 1;
+  .feature-card {
+    grid-column: span 1 !important;
   }
 }
 

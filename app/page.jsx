@@ -101,8 +101,8 @@ export default function HomePage() {
               <p>Filter by log level, keyword, or time range. Get straight to the line that matters — without scrolling through thousands of others. <Link href="/docs/query-language" style={{ color: '#0d9488', textDecoration: 'none' }}>Query language docs →</Link></p>
             </div>
           </div>
-          <div className="feature-card">
-            <div style={{ position: 'relative', flex: 1, overflow: 'hidden', padding: '1.5rem 1.5rem 0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="feature-card" style={{ justifyContent: 'center' }}>
+            <div style={{ position: 'relative', flex: 1, overflow: 'hidden', padding: '1.5rem 1.5rem 0', display: 'flex', alignItems: 'center', justifyContent: 'center', maxHeight: '16rem' }}>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignContent: 'flex-start', justifyContent: 'flex-start', width: '100%' }}>
                 {Array.from({ length: 3 }).flatMap((_, i) => [
                   { name: 'Nginx', color: '#009900', icon: (
