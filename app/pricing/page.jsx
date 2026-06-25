@@ -105,7 +105,7 @@ export default function PricingPage() {
               </svg>
             </div>
             <div style={{ fontSize: '0.8125rem', fontWeight: 600, color: '#9ca3af', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Pro</div>
-            <div style={{ fontSize: '2.25rem', fontWeight: 800, letterSpacing: '-0.04em', color: '#fff' }}>$35<span style={{ fontSize: '1rem', fontWeight: 500, color: '#9ca3af' }}>/year</span></div>
+            <div style={{ fontSize: '2.25rem', fontWeight: 800, letterSpacing: '-0.04em', color: '#fff' }}>$35<span style={{ fontSize: '1rem', fontWeight: 500, color: '#9ca3af' }}>/license</span></div>
             <div style={{ fontSize: '0.875rem', color: '#6b7280', marginTop: '0.25rem' }}>Keep it forever · 1 year of updates</div>
           </div>
           <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
