@@ -111,6 +111,7 @@ export default function PricingPage() {
           <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             {[
               'Everything in Free',
+              'Multiple tabs',
               'Session persistence',
               'CLI support for AI agents',
             ].map(f => (
